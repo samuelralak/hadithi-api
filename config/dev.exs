@@ -49,8 +49,8 @@ config :phoenix, :plug_init_mode, :runtime
 
 # Configure your database
 config :hadithi_api, HadithiApi.Repo,
-  username: "postgres",
-  password: "postgres",
+  hostname: System.get_env("DATABASE_HOST") || "localhost",
+  username: System.get_env("DATABASE_USER") || "postgres",
+  password: System.get_env("DATABASE_PASS") || "postgres",
   database: "hadithi_api_dev",
-  hostname: "localhost",
   pool_size: 10
