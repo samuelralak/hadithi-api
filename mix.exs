@@ -40,7 +40,12 @@ defmodule HadithiApi.MixProject do
       {:postgrex, ">= 0.0.0"},
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
-      {:plug_cowboy, "~> 2.0"}
+      {:plug_cowboy, "~> 2.0"},
+      {:httpoison, "~> 1.6"},
+      {:oauther, "~> 1.1"},
+      {:cors_plug, "~> 2.0"},
+      {:comeonin, "~> 5.1"},
+      {:argon2_elixir, "~> 2.0"}
     ]
   end
 
