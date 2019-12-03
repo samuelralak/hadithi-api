@@ -54,3 +54,7 @@ config :hadithi_api, HadithiApi.Repo,
   password: System.get_env("DATABASE_PASS") || "postgres",
   database: "hadithi_api_dev",
   pool_size: 10
+
+config :hadithi_api, :generators,
+  migration: true,
+  binary_id: true
