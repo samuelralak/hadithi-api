@@ -17,5 +17,6 @@ defmodule HadithiApi.Accounts.User do
     user
     |> cast(attrs, [:email, :name, :password])
     |> validate_required([:email, :name, :password])
+    |> unique_constraint(:email, name: :users_email_index)
   end
 end

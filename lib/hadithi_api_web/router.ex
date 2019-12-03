@@ -12,6 +12,9 @@ defmodule HadithiApiWeb.Router do
       # Twitter
       get("/twitter/request_token", TwitterAuthController, :request_token)
       post("/twitter/access_token", TwitterAuthController, :access_token)
+
+      # Registrations
+      post("/sign_up", RegistrationController, :create)
     end
   end
 end
