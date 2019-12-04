@@ -58,3 +58,13 @@ config :hadithi_api, HadithiApi.Repo,
 config :hadithi_api, :generators,
   migration: true,
   binary_id: true
+
+# Twitter API configuration
+config :hadithi_api, HadithiApi.Twitter,
+  consumer_key: "bhwQC845gDlTUE10ON3ydOfVz",
+  consumer_secret: "Gq3KO1GIGtocSYYdjaf0DNjgOiexBgjWmeNEb0eF2JIXWT7ec0",
+  token: "",
+  token_secret: ""
+
+config :cors_plug,
+  origin: ["http://localhost:3000", "http://127.0.0.1:3000"]
