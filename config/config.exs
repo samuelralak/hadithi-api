@@ -31,6 +31,7 @@ config :phoenix, :json_library, Jason
 # Guardian Auth configuration
 config :hadithi_api, HadithiApi.Auth.Guardian,
   issuer: "Hadithi",
+  ttl: {1, :days},
   secret_key: System.get_env("GUARDIAN_SECRET_KEY") || secret_key
 
 # Import environment specific config. This must remain at the bottom

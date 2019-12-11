@@ -18,6 +18,7 @@ defmodule HadithiApi.Accounts.SignUp do
     signup
     |> cast(attrs, @permitted)
     |> validate_required(@permitted)
+    |> validate_length(:password, min: 4, max: 256)
     |> validate_confirmation(:password, message: "does not match password!")
   end
 end

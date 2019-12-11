@@ -61,7 +61,7 @@ defmodule HadithiApiWeb.FallbackController do
     service_unavailable(conn, %{exception: exception, message: message})
   end
 
-  defp service_unavailable(conn, error) do
+  defp service_unavailable(conn, _error) do
     conn
     |> put_status(503)
     |> put_view(HadithiApiWeb.ErrorView)

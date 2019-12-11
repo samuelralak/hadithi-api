@@ -1,5 +1,5 @@
 defmodule HadithiApi.Auth.Guardian do
-  use Guardian, otp_app: :my_app
+  use Guardian, otp_app: :hadithi_api
 
   ## Guardian callbacks
 
@@ -9,8 +9,7 @@ defmodule HadithiApi.Auth.Guardian do
       user
       |> Map.from_struct()
       |> Map.take([:id, :email, :name])
-      |> :erlang.term_to_binary()
-      |> Base.encode64()
+      |> Jason.encode!()
 
     {:ok, sub}
   end

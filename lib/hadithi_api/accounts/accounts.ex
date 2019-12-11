@@ -2,7 +2,7 @@ defmodule HadithiApi.Accounts do
   @moduledoc """
   Accounts context
   """
-
+  alias Ecto.Multi
   alias HadithiApi.Accounts.User
   alias HadithiApi.Accounts.SignUp
   alias HadithiApi.Repo
@@ -13,12 +13,16 @@ defmodule HadithiApi.Accounts do
     if changeset.valid? do
       user_attrs = Map.take(changeset.changes, [:email, :password])
 
-      User
-      |> Kernel.struct(user_attrs)
-      |> Repo.insert()
+      Multi.new()
+      |> Multi.insert(:user, user_changeset(user_attrs))
+      |> Repo.transaction()
     else
       {:error, changeset}
     end
+  end
+
+  defp user_changeset(params) do
+    User.changeset(%User{}, params)
   end
 
   defp sign_up_changeset(params) do

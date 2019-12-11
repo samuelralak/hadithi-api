@@ -1,26 +1,31 @@
-defmodule HadithiApiWeb.Api.V1.RegistrationController do
+defmodule HadithiApiWeb.Api.V1.AuthenticationController do
   @moduledoc """
-  Registrations controller
+  Authentication controller
   """
 
   use HadithiApiWeb, :controller
 
-  alias HadithiApi.Accounts
   alias HadithiApi.Auth
   alias HadithiApi.Auth.Token
+
+  plug(Guardian.Plug.EnsureAuthenticated, [handler: __MODULE__] when action in [:delete])
 
   action_fallback(HadithiApiWeb.FallbackController)
 
   def create(conn, %{"user" => user_params}) do
-    with {:ok, %{user: user}} <- Accounts.sign_up(user_params),
-         {:ok, user} <- Auth.authenticate_user(%{email: user.email, password: user.password}),
+    with {:ok, user} <- Auth.authenticate_user(user_params),
          token <- Token.new(conn, user) do
       conn
-      |> put_status(:created)
       |> put_resp_header("authorization", "Bearer #{token.access_token}")
       |> put_resp_header("x-expires", "#{token.expires_in}")
       |> put_view(HadithiApiWeb.TokenView)
       |> render("show.json", token: token)
     end
+  end
+
+  def delete(conn, _) do
+    conn
+    |> HadithiApi.Auth.Guardian.Plug.sign_out()
+    |> send_resp(200, "")
   end
 end

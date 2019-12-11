@@ -40,5 +40,6 @@ defmodule HadithiApiWeb.Endpoint do
     key: "_hadithi_api_key",
     signing_salt: "onPgpCoJ"
 
+  plug CORSPlug
   plug HadithiApiWeb.Router
 end
