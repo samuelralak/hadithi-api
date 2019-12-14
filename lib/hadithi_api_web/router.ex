@@ -13,6 +13,11 @@ defmodule HadithiApiWeb.Router do
     pipe_through([:api, :auth])
 
     scope "/v1", V1, as: :v1 do
+      # My Profile
+      get("/me", MeController, :show)
+      put("/me", MeController, :update)
+      patch("/me", MeController, :update)
+
       # Twitter
       get("/twitter/request_token", TwitterAuthController, :request_token)
       post("/twitter/access_token", TwitterAuthController, :access_token)

@@ -16,12 +16,8 @@ defmodule HadithiApi.Auth.Guardian do
 
   @impl true
   def resource_from_claims(%{"sub" => encoded_user}) do
-    user_params =
-      encoded_user
-      |> Base.decode64!()
-      |> :erlang.binary_to_term()
-
-    {:ok, user_params}
+    resource = Jason.decode!(encoded_user)
+    {:ok, resource}
   end
 
   @impl true

@@ -7,6 +7,8 @@ defmodule HadithiApi.Accounts do
   alias HadithiApi.Accounts.SignUp
   alias HadithiApi.Repo
 
+  def get_user!(id), do: Repo.get!(User, id)
+
   def sign_up(user_params) do
     changeset = sign_up_changeset(user_params)
 
@@ -14,16 +16,22 @@ defmodule HadithiApi.Accounts do
       user_attrs = Map.take(changeset.changes, [:email, :password])
 
       Multi.new()
-      |> Multi.insert(:user, user_changeset(user_attrs))
+      |> Multi.insert(:user, change_user(%User{}, user_attrs))
       |> Repo.transaction()
     else
       {:error, changeset}
     end
   end
 
-  defp user_changeset(params) do
-    User.changeset(%User{}, params)
+  def update_user(%User{} = user, attrs) do
+    user
+    |> change_user(attrs)
+    |> Repo.update()
   end
+
+  ## Private Functions
+
+  defp change_user(user, params), do: User.changeset(user, params)
 
   defp sign_up_changeset(params) do
     SignUp.changeset(%SignUp{}, params)
