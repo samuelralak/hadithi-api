@@ -46,7 +46,8 @@ defmodule HadithiApi.MixProject do
       {:cors_plug, "~> 2.0"},
       {:comeonin, "~> 5.1"},
       {:argon2_elixir, "~> 2.0"},
-      {:guardian, "~> 2.0"}
+      {:guardian, "~> 2.0"},
+      {:tzdata, "~> 1.0.1"}
     ]
   end
 
