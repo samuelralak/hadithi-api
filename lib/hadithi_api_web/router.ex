@@ -28,6 +28,9 @@ defmodule HadithiApiWeb.Router do
       # Authentication
       post("/sign_in", AuthenticationController, :create)
       delete("/sign_out", AuthenticationController, :delete)
+
+      # Timezone data
+      get("/timezone/list", TimezoneDataController, :index)
     end
   end
 end
