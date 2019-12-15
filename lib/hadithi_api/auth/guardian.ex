@@ -8,7 +8,7 @@ defmodule HadithiApi.Auth.Guardian do
     sub =
       user
       |> Map.from_struct()
-      |> Map.take([:id, :email, :name])
+      |> Map.drop([:__meta__, :password, :inserted_at, :updated_at])
       |> Jason.encode!()
 
     {:ok, sub}
