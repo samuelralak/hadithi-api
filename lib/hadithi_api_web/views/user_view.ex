@@ -1,6 +1,6 @@
 defmodule HadithiApiWeb.UserView do
   use HadithiApiWeb, :view
-  import DenariusWeb.ViewHelpers
+  import HadithiApiWeb.ViewHelpers
 
   alias __MODULE__
 

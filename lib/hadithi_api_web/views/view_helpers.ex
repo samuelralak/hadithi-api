@@ -1,4 +1,4 @@
-defmodule DenariusWeb.ViewHelpers do
+defmodule HadithiApiWeb.ViewHelpers do
   @moduledoc """
   Convenience methods for handling view properties
   """
